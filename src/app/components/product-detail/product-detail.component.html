@@ -1,0 +1,47 @@
+<div class="container mx-auto py-12 px-6" *ngIf="product$ | async as product">
+  <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+      <!-- Section de l'image du produit -->
+      <div class="relative">
+        <div class="h-96 md:h-full overflow-hidden">
+          <img [src]="product.image" alt="{{ product.name }}" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Section des informations du produit -->
+      <div class="p-8 flex flex-col h-full">
+        <!-- Nom du produit -->
+        <h1 class="text-3xl font-bold text-gray-800 mb-3">{{ product.name }}</h1>
+
+        <!-- Prix -->
+        <div class="mb-6">
+          <span class="text-3xl font-bold text-indigo-700">{{ product.price }} €</span>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-8 flex-grow">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
+          <p class="text-gray-600">{{ product.description }}</p>
+        </div>
+
+        <!-- Disponibilité en stock -->
+        <div *ngIf="product.stock" class="text-emerald-600 font-medium text-sm mt-2 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          En stock
+        </div>
+        <div *ngIf="!product.stock" class="text-rose-600 font-medium text-sm mt-2 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          En rupture de stock
+        </div>
+        <button (click)="addToCart(product)" class="bg-indigo-600 text-white px-4 py-2 rounded">
+          Ajouter au panier
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
